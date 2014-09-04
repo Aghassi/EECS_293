@@ -1,0 +1,22 @@
+Programming Project 1
+Mental notes
+	*We want to look at a model view controller setup since we will have input and we can limit input via textboxes and such
+	*We want to be able to compare the characters first, then the number of characters second
+	*We can store things alphabetically, by vowel, or in order of most common letters. Just thinking of ways to cut down parse time between two hash tables (which is essentailly what we will be using). 
+	*Use either a hashtable, or use an array with a model that holds the vowel and the number associated with it. 
+	*Look into substring class that java provides. See if there are any libraries that compare strings for you easily.
+	*We don't know if capitlization is important in the future or not, so don't code this in a way that you can't accomodate for that later. Same thing with spaces. For now, make all things lower case, and trim white space.
+	*Ignore special characters such as .,?/"';" etc.
+	*Ignore numbers
+
+Structure
+	*Interface class - handles the interface
+	*Parser - Handles reading the data from the interface into local arrays/hashtables
+	*Comparer - will compare the data.
+	*Models (if any) - the models that hold the data
+
+Method of comparing
+	*read in both then compare against two arrays
+	*read in one then compare the next item against the array that already exists. Less overhead. See if the letter exists already. If it does, add it and keep going. Otherwise we can stop and let go all of the memory we have because it doesn't matter.
+	*Read both into hashmaps, and then compare them. If the size is different they can't be the same.
+	

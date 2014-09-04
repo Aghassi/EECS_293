@@ -23,12 +23,15 @@ public class InputReader {
 	 * @return True if the two values match
 	 */
 	public boolean readInput(String inputBoxLeft, String inputBoxRight){
-		//PUt the data in tables and clean it
+		//Put the data in tables and clean it
 		readInData(inputBoxLeft, inputBoxRight);
 		
-		boolean isTheSame = false;
+		//Start by assuming the data is the same
+		boolean isTheSame = true;
+		
 		//If they aren't the same length, they can't be the same at all
 		if(base.size() != compareToBase.size()){
+			isTheSame = false;
 			return isTheSame;
 		}
 		else{
@@ -38,17 +41,8 @@ public class InputReader {
 			 * 
 			 */
 			for(Map.Entry<Character, Integer> entry : base.entrySet()){
-				if(compareToBase.containsKey(entry.getKey())){
-					if(compareToBase.get(entry.getKey()) == entry.getValue()){
-						isTheSame = true;
-					}
-					//If they don't have the same key value, we can stop there because they aren't the same
-					else{
-						break;
-					}
-				}
-				//If the entry doesn't contain the value at all, we can break and save time
-				else{
+				if(!compareToBase.containsKey(entry.getKey())){
+					isTheSame = false;
 					break;
 				}
 			}
@@ -58,14 +52,10 @@ public class InputReader {
 	
 	/**
 	 * Wrapper method that puts the data in hashmaps and cleans the strings
-	 * @param inputBoxLeft The data coming from the left input text box
-	 * @param inputBoxRight The data coming from the right input text box
+	 * @param baseString The data coming from the left input text box
+	 * @param compareToBaseString The data coming from the right input text box
 	 */
-	private void readInData(String inputBoxLeft, String inputBoxRight){
-		
-		//Clean the strings before use.
-		String baseString = cleanseString(inputBoxLeft);
-		String compareToBaseString = cleanseString(inputBoxRight);
+	private void readInData(String baseString, String compareToBaseString){
 		
 		//Abstracted the population method for future maintence
 		populateHashMaps(baseString, base);
@@ -90,19 +80,6 @@ public class InputReader {
 				table.put(string.charAt(i), 1);
 			}
 		}
-	}
-	
-	/**
-	 * Cleans the strings prior to use. Removes white space and puts it as lowercase
-	 * @param stringToBeCleansed
-	 * @return Returns the cleaned string.
-	 */
-	private String cleanseString(String stringToBeCleansed){
-		//Trim the strings and make them lower case
-		String cleansedString = stringToBeCleansed;
-		cleansedString.trim();
-		cleansedString.toLowerCase();
-		return cleansedString;
 	}
 
 }
