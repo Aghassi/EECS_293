@@ -18,14 +18,16 @@ public class User{
 	}
 
 	public String getID(){
-
+		//returns the id of the current user.
+		//if return null if the user is still invalid
 	}
 
 	public boolean isInvalid(){
-
+		//returns whether the user is valid or not
 	}
 
 	public String toString(){
-
+		//return "User: id"
+		//If invalid "Invalid User: Uninitialized ID"
 	}
 }
