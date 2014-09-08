@@ -1,3 +1,7 @@
+import com.sun.org.apache.xalan.internal.lib.ExsltDatetime;
+
+import java.util.ArrayList;
+
 /**
 * A class that represents a link between two users
 * David Aghassi (dsa28@case.edu)
@@ -7,6 +11,7 @@
 public class Link{
 	private boolean isValidLink;
 	private Set<User> linkedUsers;
+    private ArrayList<E> dates;
 
 	/**
 	* Creates and invalid link
@@ -14,6 +19,7 @@ public class Link{
 	public Link(){
 		this.isValidLink = false;
 		linkedUsers = new Set<User>();
+        dates = new ArrayList<E>();
 	}
 
 	public boolean setUsers(Set<User> users){
@@ -58,20 +64,49 @@ public class Link{
 		//If link invalid, return false
 	}
 
+    /**
+     * A method to get the first date of the link
+     * If the object is invalid, it will throw an exception
+     * @return Null if there is no object at the first date in the array
+     * The date otherwise.
+     */
 	public Date firstDate(){
-		//returns the date of the first event recorded in this link
-		//returns null if the event has not been established yet
-		//If invalid, throw an UninitializedObjectException
+        if (!isInvalidLink()) {
+            if (dates.get(0) == null) {
+                return null;
+            } else {
+                return dates.get(0);
+            }
+        }
 	}
 
+    /**
+     * Returns the next date after the one being requested
+     * @param date The date being requested
+     * @return The next date, or null if the date set doesn't contain the passed in date
+     */
 	public Date nextDate(Date date){
-		//returns the next event after the passed in date.
-		//null is returned if no such event exists
-		//If invalid, throw an UninitializedObjectException
+        if(!isInvalidLink()) {
+            if (dates.contains(date)) {
+                dates.get(dates.indexOf(date) + 1);
+            } else {
+                return null;
+            }
+        }
 	}
 
 	public String toString(){
 		//returns "link: valid link"
 		//or "Invalid link: uninitialized id" if invalid.
 	}
+
+    /**
+     * Checks if the link is invalid
+     * @return False if it isn't invalid, true if it is
+     */
+    private boolean isInvalidLink(){
+        if (!this.isValidLink){
+            //If invalid, throw an UninitializedObjectException
+        }
+    }
 }
