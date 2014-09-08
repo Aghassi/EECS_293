@@ -99,12 +99,27 @@ public class Link{
         }
 	}
 
+    /**
+     * Returns if the link is active at the given date. Does nothing if the link is invalid
+     * @param date The date being requested
+     * @return True if the date is acive, false otherwise
+     */
 	public boolean isActive(Date date){
-
-		//returns whether the link is active at the given date
-		/*If there are multiple links to one day, the last link there will decide if it is active or not
-		*/
-		//If link invalid, return false
+        if(isInvalidLink()){
+            return false;
+        }
+        else{
+            if(dates.contains(date)){
+                if(dates.lastIndexOf(date)%2 == 0) {
+                    //Even means it is active.
+                    return true;
+                }
+                else{
+                    //Inactive
+                    return false;
+                }
+            }
+        }
 	}
 
     /**
@@ -141,9 +156,17 @@ public class Link{
         return null;
 	}
 
+    /**
+     * Returns a legible version if the link is valid.
+     * @return A string if the link is valid or not
+     */
 	public String toString(){
-		//returns "link: valid link"
-		//or "Invalid link: uninitialized id" if invalid.
+        if(isInvalidLink()){
+            return "Invalid link: uninitialized id";
+        }
+        else{
+            return "Link: valid link";
+        }
 	}
 
     /**
