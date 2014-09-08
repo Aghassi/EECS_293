@@ -4,30 +4,67 @@
 **/
 
 public class User{
+	private String id;
+	private boolean isValidUser;
 
-	public User(){
-		//creates a new user, no exceptions thrown
-
+	/**
+	* Creates a new user
+	* @param id - the name of the user being passed in
+	**/
+	public User(String id){
+		id = id;
+		isValidUser = false;
 	}
 
+	/**
+	* Sets the id of the user
+	* @param id - the id of the user to be set
+	* @return True if the id is marked as valid, false if otherwise
+	**/
 	public boolean setID(String id){
-		//Marks the user as valid
-		//If valid do nothing
-		//Return true otherwise
-		//If null, throw nullPointerException
+		if(this.isValidUser == null){
+			//throw nullpointer exception
+		}
+		if(!this.isValidUser){
+			this.isValidUser = true;
+			return true;
+		}
+		else{
+			//Do nothing
+		}
 	}
 
+	/**
+	* Returns the id of the user as long as it is valid
+	* @return The id, null if it is valid
+	**/
 	public String getID(){
-		//returns the id of the current user.
-		//if return null if the user is still invalid
+		if(!this.isValidUser){
+			return null;
+		}
+		else{
+			return this.id;
+		}
 	}
 
+	/**
+	* @return If the user is valid or not
+	**/
 	public boolean isInvalid(){
-		//returns whether the user is valid or not
+		return this.isValidUser;
 	}
 
+	/**
+	* Prints a legible string for the user if of the current user
+	* @return A string with the id of the current user, or "Invalid User" if the user is
+	* uninitialized
+	**/
 	public String toString(){
-		//return "User: id"
-		//If invalid "Invalid User: Uninitialized ID"
+		if(!this.isValidUser){
+			return "Invalid User: Uninitialized ID";
+		}
+		else{
+			return "User: " + this.id;
+		}
 	}
 }

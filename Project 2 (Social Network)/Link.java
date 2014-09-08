@@ -5,9 +5,15 @@
 **/
 
 public class Link{
+	private boolean isValidLink;
+	private Set<User> linkedUsers;
 
+	/**
+	* Creates and invalid link
+	**/
 	public Link(){
-		//creates an invalid link, throws no exceptions
+		this.isValidLink = false;
+		linkedUsers = new Set<User>();
 	}
 
 	public boolean setUsers(Set<User> users){
@@ -17,9 +23,17 @@ public class Link{
 		//Else return true
 	}
 
+	/**
+	* Returns the set of users in this link
+	* Will throw an exception if the link is invalid
+	**/
 	public Set<User> getUsers(){
-		//returns the two connected users
-		//If invalid, throw an UninitializedObjectException
+		if(!this.isValidLink){
+			//If invalid, throw an UninitializedObjectException 
+		}
+		else{
+			return this.linkedUsers;
+		}
 	}
 
 	public boolean establish(Date date){
