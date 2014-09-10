@@ -1,6 +1,9 @@
 package SocialNetwork;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
 * A class that represents a link between two users
@@ -10,10 +13,11 @@ import java.util.HashMap;
 
 public class SocialNetwork{
     private HashMap<String, User> userMap;
+    private HashMap<Set<String>, Link> links;
 
 	public SocialNetwork(){
         userMap = new HashMap<String, User>();
-
+        links  = new HashMap<Set<String>, Link>();
 	}
 
     /**
@@ -47,29 +51,75 @@ public class SocialNetwork{
      */
 	public User getUser(String id){
         if(!userMap.containsKey(id)){
-            return null
+            return null;
         }
-        else{
-            return userMap.get(id);
-        }
+        return userMap.get(id);
 	}
 
+    /**
+     * Establishes the link between two users
+     * If the users being passed in aren't valid, or the date is not up to date
+     * nothing is done
+     * @param ids The pair of users being passed in
+     * @param date The date being passed in
+     * @return True if the link is established, false otherwise.
+     */
 	public boolean establishLink(Set<String> ids, Date date){
-		//Establish a link between two users at the given date
-		/*return false if one or both of the users are null
-		or not distinct users. If the date precedes the given date,
-		do the same*/
+       if(checkValidity(ids, date)){
+           Link linkToAdd = new Link();
+           Object[] userIDs = ids.toArray();
+           ArrayList<User> usersToAdd = new ArrayList<User>();
+           for (int i = 0; i < ids.toArray().length; i++) {
+               usersToAdd.add(getUser(userIDs[i].toString()));
+           }
+           linkToAdd.setUsers(usersToAdd);
+           linkToAdd.establish(date);
+           links.put(ids, linkToAdd);
+           return true;
+       }
+       return false;
 	}
 
+    /**
+     * Tears down the link between two userss at the given date and returns true
+     * Otherwise, returns false if users aren't valid, or if date is not recent
+     * @param id User pair being passed in
+     * @param date Date looking to tear down
+     * @return True on success, false otherwise.
+     */
 	public boolean tearDownLink(Set<String> id, Date date){
-		//Tear down the link at the given date, return true
-		/*return false if one or both of the users are null
-		or not distinct users. If the date precedes the given date,
-		do the same*/
+        if(checkValidity(ids, date)){
+            links.get(id).tearDown(date);
+            return true;
+        }
+        return false;
 	}
 
 	public boolean isActive(Set<String> ids, Date date){
-		//returns whether a link between the users with the given ids exists and is active
-		
+        return  checkValidity();
 	}
+
+    /**
+     * Checks to see if the date is less than the date in the link
+     * @param link Link being checked
+     * @param date date being compared
+     * @return True if it is not less then, false otherwise.
+     */
+    private boolean checkValidity(Set<String> ids, Date date){
+        boolean dateValid = false;
+        boolean usersValid = false;
+        boolean linksActive = false;
+
+        if(!link.nextDate(date).equals(null)){
+            dateValid = true;
+        }
+        Object[] userIDs = ids.toArray();
+        for (int i = 0; i < userIDs.length; i++) {
+            usersValid = (userMap.containsKey(userIDs[i]) || !userIDs[i].equals(null));
+        }
+
+        linksActive = links.get(ids).isActive(date);
+
+        return (dateValid && linksActive && usersValid);
+    }
 }
