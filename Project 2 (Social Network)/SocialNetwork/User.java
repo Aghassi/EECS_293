@@ -42,7 +42,7 @@ public class User{
 	* @return The id, null if it is valid
 	**/
 	public String getID(){
-		if(!this.isValidUser){
+		if(!isInvalid()){
 			return null;
 		}
 		else{
