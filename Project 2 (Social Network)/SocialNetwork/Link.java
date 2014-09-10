@@ -22,7 +22,7 @@ public class Link{
 	* Creates and invalid link
 	**/
 	public Link(){
-		this.isValidLink = false;
+		isValidLink = false;
 		linkedUsers = new ArrayList<User>();
         dates = new ArrayList<Date>();
 	}
@@ -34,11 +34,12 @@ public class Link{
      * one of the users is not valid.
      */
 	public boolean setUsers(ArrayList<User> users){
-		if(!isValidLink || !isUserValid(users)){
+		if(!isUserValid(users) || linkedUsers.size()!=0){
             return false;
 		}
         else{
             linkedUsers = users;
+            isValidLink = true;
             return true;
         }
 	}

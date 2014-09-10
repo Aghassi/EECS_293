@@ -1,5 +1,6 @@
-package SocialNetwork;
+package Testing;
 
+import SocialNetwork.User;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -43,6 +44,17 @@ public class UserUnitTest {
         //Set to valid
         testUser.setID(testUser.getID());
         Assert.assertNotNull(testUser.getID());
+    }
+
+    @Test
+    public void testToString(){
+        User testUser = new User("David");
+
+        //Test
+        Assert.assertSame("Invalid SocialNetwork.User: Uninitialized ID", testUser.toString());
+        //Set to valid
+        testUser.setID(testUser.getID());
+        Assert.assertSame("SocialNetwork.User: " + testUser.getID(), testUser.toString());
     }
 
 }

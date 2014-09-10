@@ -63,7 +63,7 @@ public class User{
 	* uninitialized
 	**/
 	public String toString(){
-		if(!this.isValidUser){
+		if(!isInvalid()){
 			return "Invalid SocialNetwork.User: Uninitialized ID";
 		}
 		else{
