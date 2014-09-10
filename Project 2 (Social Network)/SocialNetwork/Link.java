@@ -47,14 +47,13 @@ public class Link{
 	* Returns the set of users in this link
 	* Will throw an exception if the link is invalid
 	**/
-	public ArrayList<User> getUsers(){
+	public ArrayList<User> getUsers() throws  UninitializedObjectException{
 		if(!this.isValidLink){
-			//If invalid, throw an SocialNetwork.UninitializedObjectException
+			throw new UninitializedObjectException();
 		}
-		else{
-			return this.linkedUsers;
-		}
-        return null;
+		else {
+            return this.linkedUsers;
+        }
     }
 
     /**
@@ -173,9 +172,9 @@ public class Link{
      * Checks if the link is invalid
      * @return False if it isn't invalid, true if it is
      */
-    private boolean isInvalidLink(){
+    private boolean isInvalidLink() throws UninitializedObjectException{
         if (!this.isValidLink){
-            //If invalid, throw an SocialNetwork.UninitializedObjectException
+            throw new UninitializedObjectException("Invalid link!");
         }
         return true;
     }

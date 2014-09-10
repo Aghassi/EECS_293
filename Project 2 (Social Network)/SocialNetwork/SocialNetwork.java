@@ -88,7 +88,7 @@ public class SocialNetwork{
      * @return True on success, false otherwise.
      */
 	public boolean tearDownLink(Set<String> id, Date date){
-        if(checkValidity(ids, date)){
+        if(checkValidity(id, date)){
             links.get(id).tearDown(date);
             return true;
         }
@@ -96,12 +96,12 @@ public class SocialNetwork{
 	}
 
 	public boolean isActive(Set<String> ids, Date date){
-        return  checkValidity();
+        return  checkValidity(ids, date);
 	}
 
     /**
      * Checks to see if the date is less than the date in the link
-     * @param link Link being checked
+     * @param ids ids being checked
      * @param date date being compared
      * @return True if it is not less then, false otherwise.
      */
@@ -110,7 +110,7 @@ public class SocialNetwork{
         boolean usersValid = false;
         boolean linksActive = false;
 
-        if(!link.nextDate(date).equals(null)){
+        if(!links.get(ids).nextDate(date).equals(null)){
             dateValid = true;
         }
         Object[] userIDs = ids.toArray();

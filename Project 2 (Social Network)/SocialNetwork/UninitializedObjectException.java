@@ -12,7 +12,7 @@ public class UninitializedObjectException extends NullPointerException{
 	}
 
 	public UninitializedObjectException(String message){
-
+        System.out.print(message);
 	}
 
 	public UninitializedObjectException(String message, Throwable cause){

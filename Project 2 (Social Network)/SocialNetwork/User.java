@@ -25,7 +25,7 @@ public class User{
 	**/
 	public boolean setID(String id){
         if(id == null){
-            //throw exception
+            throw new UninitializedObjectException("Please pass in a valid user id");
         }
         else {
             if (!this.isValidUser) {
