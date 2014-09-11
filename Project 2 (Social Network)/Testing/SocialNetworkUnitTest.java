@@ -61,8 +61,8 @@ public class SocialNetworkUnitTest {
         testNetwork.addUser(userThree);
 
         //Test
-        Assert.assertTrue(testNetwork.establishLink((Set<String>) userIds, testDate));
-        Assert.assertTrue(testNetwork.tearDownLink((Set<String>) userIds, testDate));
+        Assert.assertTrue(testNetwork.establishLink(userIds, testDate));
+        Assert.assertTrue(testNetwork.tearDownLink(userIds, testDate));
     }
 
 }

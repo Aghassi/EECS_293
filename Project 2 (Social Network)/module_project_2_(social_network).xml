@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_project_2_(social_network)" default="compile.module.project_2_(social_network)">
+  <dirname property="module.project_2_(social_network).basedir" file="${ant.file.module_project_2_(social_network)}"/>
+  
+  <property name="module.jdk.home.project_2_(social_network)" value="${jdk.home.1.6}"/>
+  <property name="module.jdk.bin.project_2_(social_network)" value="${jdk.bin.1.6}"/>
+  <property name="module.jdk.classpath.project_2_(social_network)" value="jdk.classpath.1.6"/>
+  
+  <property name="compiler.args.project_2_(social_network)" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
+  
+  <property name="project_2_(social_network).output.dir" value="${module.project_2_(social_network).basedir}/out/production/Project 2 (Social Network)"/>
+  <property name="project_2_(social_network).testoutput.dir" value="${module.project_2_(social_network).basedir}/out/test/Project 2 (Social Network)"/>
+  
+  <path id="project_2_(social_network).module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="project_2_(social_network).module.production.classpath">
+    <path refid="${module.jdk.classpath.project_2_(social_network)}"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/hamcrest-library-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.11.jar"/>
+  </path>
+  
+  <path id="project_2_(social_network).runtime.production.module.classpath">
+    <pathelement location="${project_2_(social_network).output.dir}"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/hamcrest-library-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.11.jar"/>
+  </path>
+  
+  <path id="project_2_(social_network).module.classpath">
+    <path refid="${module.jdk.classpath.project_2_(social_network)}"/>
+    <pathelement location="${project_2_(social_network).output.dir}"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/hamcrest-library-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.11.jar"/>
+  </path>
+  
+  <path id="project_2_(social_network).runtime.module.classpath">
+    <pathelement location="${project_2_(social_network).testoutput.dir}"/>
+    <pathelement location="${project_2_(social_network).output.dir}"/>
+    <pathelement location="${idea.home}/lib/hamcrest-core-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/hamcrest-library-1.3.jar"/>
+    <pathelement location="${idea.home}/lib/junit-4.11.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.project_2_(social_network)">
+    <patternset refid="ignored.files"/>
+    <exclude name="out/**"/>
+    <exclude name="out/production/**"/>
+    <exclude name="out/production/Project 2 (Social Network)/**"/>
+    <exclude name="out/production/Project 2 (Social Network)/.idea/**"/>
+    <exclude name="out/production/Project 2 (Social Network)/.idea/scopes/**"/>
+    <exclude name="out/production/Project 2 (Social Network)/.idea/copyright/**"/>
+    <exclude name="out/production/Project 2 (Social Network)/Testing/**"/>
+    <exclude name="out/production/Project 2 (Social Network)/SocialNetwork/**"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.project_2_(social_network)">
+    <patternset refid="excluded.from.module.project_2_(social_network)"/>
+  </patternset>
+  
+  <path id="project_2_(social_network).module.sourcepath">
+    <dirset dir="${module.project_2_(social_network).basedir}/../../EECS293">
+      <include name="Project 2 (Social Network)"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.project_2_(social_network)" depends="compile.module.project_2_(social_network).production,compile.module.project_2_(social_network).tests" description="Compile module Project 2 (Social Network)"/>
+  
+  <target name="compile.module.project_2_(social_network).production" depends="register.custom.compilers" description="Compile module Project 2 (Social Network); production classes">
+    <mkdir dir="${project_2_(social_network).output.dir}"/>
+    <javac2 destdir="${project_2_(social_network).output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.project_2_(social_network)}/javac">
+      <compilerarg line="${compiler.args.project_2_(social_network)}"/>
+      <bootclasspath refid="project_2_(social_network).module.bootclasspath"/>
+      <classpath refid="project_2_(social_network).module.production.classpath"/>
+      <src refid="project_2_(social_network).module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.project_2_(social_network)"/>
+    </javac2>
+    
+    <copy todir="${project_2_(social_network).output.dir}">
+      <fileset dir="${module.project_2_(social_network).basedir}">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.project_2_(social_network).tests" depends="register.custom.compilers,compile.module.project_2_(social_network).production" description="compile module Project 2 (Social Network); test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.project_2_(social_network)" description="cleanup module">
+    <delete dir="${project_2_(social_network).output.dir}"/>
+    <delete dir="${project_2_(social_network).testoutput.dir}"/>
+  </target>
+</project>

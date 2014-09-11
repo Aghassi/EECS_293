@@ -22,27 +22,6 @@ public class LinkUnitTest {
         Assert.assertNotNull(testLink);
     }
 
-    @Test
-    public void testLinkValidity(){
-        Link testLink = new Link();
-        Date testDate = new Date();
-        testDate.setMonth(5);
-        testDate.setDate(20);
-        System.out.print(testDate.toString());
-
-        final User userOne = new User("David");
-        final User userTwo = new User("John");
-        ArrayList<User> userArrayList = new ArrayList<User>(){
-            {
-                add(userOne);
-                add(userTwo);
-            }
-        };
-
-        //Set link to active
-        testLink.setUsers(userArrayList);
-        Assert.assertTrue(testLink.isActive(testDate));
-    }
 
     @Test
     public void establishAndTearDown(){

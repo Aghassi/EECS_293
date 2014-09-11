@@ -13,11 +13,11 @@ import java.util.Set;
 
 public class SocialNetwork{
     private HashMap<String, User> userMap;
-    private HashMap<Set<String>, Link> links;
+    private HashMap<ArrayList<String>, Link> links;
 
 	public SocialNetwork(){
         userMap = new HashMap<String, User>();
-        links  = new HashMap<Set<String>, Link>();
+        links  = new HashMap<ArrayList<String>, Link>();
 	}
 
     /**
@@ -67,7 +67,7 @@ public class SocialNetwork{
      * @param date The date being passed in
      * @return True if the link is established, false otherwise.
      */
-	public boolean establishLink(Set<String> ids, Date date){
+	public boolean establishLink(ArrayList<String> ids, Date date){
        if(checkValidity(ids, date)){
            Link linkToAdd = new Link();
            Object[] userIDs = ids.toArray();
@@ -90,7 +90,7 @@ public class SocialNetwork{
      * @param date Date looking to tear down
      * @return True on success, false otherwise.
      */
-	public boolean tearDownLink(Set<String> id, Date date){
+	public boolean tearDownLink(ArrayList<String> id, Date date){
         if(checkValidity(id, date)){
             links.get(id).tearDown(date);
             return true;
@@ -104,21 +104,22 @@ public class SocialNetwork{
      * @param date date being compared
      * @return True if it is not less then, false otherwise.
      */
-    public boolean checkValidity(Set<String> ids, Date date){
+    public boolean checkValidity(ArrayList<String> ids, Date date){
         boolean dateValid = false;
         boolean usersValid = false;
-        boolean linksActive = false;
 
-        if(!links.get(ids).nextDate(date).equals(null)){
-            dateValid = true;
-        }
         Object[] userIDs = ids.toArray();
         for (int i = 0; i < userIDs.length; i++) {
             usersValid = (userMap.containsKey(userIDs[i]) || !userIDs[i].equals(null));
         }
 
-        linksActive = links.get(ids).isActive(date);
+        if(links.size() == 0) {
+            dateValid = true;
+        }
+        else{
+            dateValid = links.get(ids).isActive(date);
+        }
 
-        return (dateValid && linksActive && usersValid);
+        return (dateValid && usersValid);
     }
 }

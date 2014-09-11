@@ -20,7 +20,6 @@ public class TestSuite {
 
         linkUnitTest.createLink();
         linkUnitTest.establishAndTearDown();
-        linkUnitTest.testLinkValidity();
 
         SocialNetworkUnitTest socialNetworkUnitTest = new SocialNetworkUnitTest();
 
