@@ -63,20 +63,19 @@ public class Link{
      * @param date The date being requested
      * @return True if successful, false otherwise.
      */
-	public boolean establish(Date date){
-        if (!isInvalidLink() || dates.contains(date) ){
-            if(dates.get(dates.size()).after(date)){
+	public boolean establish(Date date) {
+        if (!isInvalidLink()) {
+            if (dates.size() > 0 && dates.get(dates.size()).after(date)) {
                 return false;
-            }
-            else{
+            } else {
                 dates.add(date);
                 return true;
             }
-        }
-        else{
+
+        } else {
             return false;
         }
-	}
+    }
 
     /**
      * Tearsdown the link created if the link is valid and the last date isn't greater
@@ -85,19 +84,8 @@ public class Link{
      * @return True if the date has been added "torndown", false otherwise
      */
 	public boolean tearDown(Date date){
-        if(!isInvalidLink() || dates.contains(date)){
-            if(dates.get(dates.size()).after(date)){
-                return false;
-            }
-            else{
-                dates.add(date);
-                return true;
-            }
-        }
-        else{
-            return false;
-        }
-	}
+      return establish(date);
+    }
 
     /**
      * Returns if the link is active at the given date. Does nothing if the link is invalid
@@ -120,7 +108,8 @@ public class Link{
                 }
             }
         }
-	}
+        return false;
+    }
 
     /**
      * A method to get the first date of the link

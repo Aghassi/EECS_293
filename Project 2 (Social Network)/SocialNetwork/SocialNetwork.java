@@ -95,17 +95,13 @@ public class SocialNetwork{
         return false;
 	}
 
-	public boolean isActive(Set<String> ids, Date date){
-        return  checkValidity(ids, date);
-	}
-
     /**
      * Checks to see if the date is less than the date in the link
      * @param ids ids being checked
      * @param date date being compared
      * @return True if it is not less then, false otherwise.
      */
-    private boolean checkValidity(Set<String> ids, Date date){
+    public boolean checkValidity(Set<String> ids, Date date){
         boolean dateValid = false;
         boolean usersValid = false;
         boolean linksActive = false;

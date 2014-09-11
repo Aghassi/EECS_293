@@ -14,8 +14,12 @@ public class User{
 	* @param id - the name of the user being passed in
 	**/
 	public User(String id){
-		id = id;
-		isValidUser = false;
+        if(id.equals(null)){
+            this.id = id;
+            isValidUser = false;
+        }
+		this.id = id;
+		isValidUser = true;
 	}
 
 	/**
@@ -25,7 +29,7 @@ public class User{
 	**/
 	public boolean setID(String id){
         if(id == null){
-            throw new UninitializedObjectException("Please pass in a valid user id");
+            throw new UninitializedObjectException("Please create a valid user id");
         }
         else {
             if (!this.isValidUser) {
@@ -42,7 +46,7 @@ public class User{
 	* @return The id, null if it is valid
 	**/
 	public String getID(){
-		if(!isInvalid()){
+		if(!isValid()){
 			return null;
 		}
 		else{
@@ -53,7 +57,7 @@ public class User{
 	/**
 	* @return If the user is valid or not
 	**/
-	public boolean isInvalid(){
+	public boolean isValid(){
 		return this.isValidUser;
 	}
 
@@ -63,7 +67,7 @@ public class User{
 	* uninitialized
 	**/
 	public String toString(){
-		if(!isInvalid()){
+		if(!isValid()){
 			return "Invalid SocialNetwork.User: Uninitialized ID";
 		}
 		else{
