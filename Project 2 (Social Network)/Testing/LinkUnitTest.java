@@ -39,9 +39,6 @@ public class LinkUnitTest {
             }
         };
 
-
-        //Test
-        Assert.assertFalse(testLink.isActive(testDate));
         //Set link to active
         testLink.setUsers(userArrayList);
         Assert.assertTrue(testLink.isActive(testDate));

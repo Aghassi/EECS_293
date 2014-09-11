@@ -65,7 +65,7 @@ public class Link{
      */
 	public boolean establish(Date date) {
         if (!isInvalidLink()) {
-            if (dates.size() > 0 && dates.get(dates.size()).after(date)) {
+            if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
                 return false;
             } else {
                 dates.add(date);
@@ -84,7 +84,17 @@ public class Link{
      * @return True if the date has been added "torndown", false otherwise
      */
 	public boolean tearDown(Date date){
-      return establish(date);
+        if (!isInvalidLink() && isActive(date)) {
+            if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
+                return false;
+            } else {
+                dates.add(date);
+                return true;
+            }
+
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -166,7 +176,7 @@ public class Link{
         if (!this.isValidLink){
             throw new UninitializedObjectException("Invalid link!");
         }
-        return true;
+        return false;
     }
 
 

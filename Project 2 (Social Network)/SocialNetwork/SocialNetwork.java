@@ -26,6 +26,9 @@ public class SocialNetwork{
      * @return True if added, false otherwise
      */
 	public boolean addUser(User user){
+        if(!user.isValid()){
+            return false;
+        }
         if (!userMap.containsValue(user)){
             userMap.put(user.getID(), user);
             return true;
