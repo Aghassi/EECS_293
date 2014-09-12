@@ -1,9 +1,8 @@
 package SocialNetwork;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
 
 import SocialNetwork.User;
 
@@ -53,7 +52,7 @@ public class Link{
 			throw new UninitializedObjectException();
 		}
 		else {
-            return this.linkedUsers;
+            return linkedUsers;
         }
     }
 
