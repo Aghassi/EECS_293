@@ -3,7 +3,6 @@ package SocialNetwork;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Set;
 
 /**
 * A class that represents a link between two users
