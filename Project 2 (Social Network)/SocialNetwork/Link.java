@@ -4,8 +4,6 @@ package SocialNetwork;
 import java.util.ArrayList;
 import java.util.Date;
 
-import SocialNetwork.User;
-
 /**
 * A class that represents a link between two users
 * David Aghassi (dsa28@case.edu)
@@ -33,15 +31,16 @@ public class Link{
      * @return True if they are linked, false if the link isn't valid or
      * one of the users is not valid.
      */
-	public boolean setUsers(ArrayList<User> users, SocialNetworkStatus status){
-		if(!isUserValid(users) || linkedUsers.size()!=0){
-            status = SocialNetworkStatus.ALREADY_VALID;
-            return false;
+	public void setUsers(ArrayList<User> users, SocialNetworkStatus status){
+		if(!isUserValid(users)){
+            status = SocialNetworkStatus.INVALID_USER;
+        }
+        if(linkedUsers.size()!=0){
+            status = SocialNetworkStatus.ALREADY_ACTIVE;
 		}
         else{
             linkedUsers = users;
             isValidLink = true;
-            return true;
         }
 	}
 
@@ -64,17 +63,16 @@ public class Link{
      * @param date The date being requested
      * @return True if successful, false otherwise.
      */
-	public boolean establish(Date date) {
-        if (!isInvalidLink()) {
-            if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
-                return false;
-            } else {
-                dates.add(date);
-                return true;
-            }
-
-        } else {
-            return false;
+	public void establish(Date date, SocialNetworkStatus status){
+        if(isActive(date)){
+            status = SocialNetworkStatus.ALREADY_ACTIVE;
+        }
+        if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
+            status = SocialNetworkStatus.INVALID_DATE;
+        }
+        else {
+            dates.add(date);
+            status = SocialNetworkStatus.SUCCESS;
         }
     }
 
@@ -84,17 +82,16 @@ public class Link{
      * @param date The date being requested
      * @return True if the date has been added "torndown", false otherwise
      */
-	public boolean tearDown(Date date){
-        if (!isInvalidLink() && isActive(date)) {
-            if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
-                return false;
-            } else {
-                dates.add(date);
-                return true;
-            }
-
-        } else {
-            return false;
+	public void tearDown(Date date, SocialNetworkStatus status){
+        if(isActive(date)){
+            status = SocialNetworkStatus.ALREADY_ACTIVE;
+        }
+        if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
+            status = SocialNetworkStatus.INVALID_DATE;
+        }
+        else {
+            dates.add(date);
+            status = SocialNetworkStatus.SUCCESS;
         }
     }
 
@@ -104,19 +101,17 @@ public class Link{
      * @return True if the date is acive, false otherwise
      */
 	public boolean isActive(Date date){
-        if(isInvalidLink()){
+        if(isValidLink()){
             return false;
         }
-        else{
-            if(dates.contains(date)){
-                if(dates.lastIndexOf(date)%2 == 0) {
-                    //Even means it is active.
-                    return true;
-                }
-                else{
-                    //Inactive
-                    return false;
-                }
+        if(dates.contains(date)){
+            if(dates.lastIndexOf(date)%2 == 0) {
+                //Even means it is active.
+                return true;
+            }
+            else{
+                //Inactive
+                return false;
             }
         }
         return false;
@@ -129,7 +124,7 @@ public class Link{
      * The date otherwise.
      */
 	public Date firstDate(){
-        if (!isInvalidLink()) {
+        if (!isValidLink()) {
             if (dates.get(0) == null) {
                 return null;
             } else {
@@ -145,7 +140,7 @@ public class Link{
      * @return The next date, or null if the date set doesn't contain the passed in date
      */
 	public Date nextDate(Date date){
-        if(!isInvalidLink()) {
+        if(!isValidLink()) {
             if (dates.contains(date)) {
                 dates.get(dates.indexOf(date) + 1);
             }
@@ -161,7 +156,7 @@ public class Link{
      * @return A string if the link is valid or not
      */
 	public String toString(){
-        if(isInvalidLink()){
+        if(isValidLink()){
             return "Invalid link: uninitialized id";
         }
         else{
@@ -173,7 +168,7 @@ public class Link{
      * Checks if the link is invalid
      * @return False if it isn't invalid, true if it is
      */
-    private boolean isInvalidLink() throws UninitializedObjectException{
+    private boolean isValidLink() throws UninitializedObjectException{
         if (!this.isValidLink){
             throw new UninitializedObjectException("Invalid link!");
         }
