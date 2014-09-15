@@ -105,7 +105,7 @@ public class User{
      */
     public User setEmailAddress(String emailAddress) throws Exception{
         checkForExceptions(emailAddress);
-        if(!emailAddress.contains('@')){
+        if(!emailAddress.contains("@")){
             throw new InvalidParameterException("Email did not containt @ symbold!");
         }
         email = emailAddress;
@@ -125,6 +125,14 @@ public class User{
         checkForExceptions(number);
         phoneNumber = number;
         return this;
+    }
+
+    /**
+     * Gets the phone number of the user
+     * @return The user's phone number
+     */
+    public String getPhoneNumber(){
+        return phoneNumber;
     }
 
 	/**

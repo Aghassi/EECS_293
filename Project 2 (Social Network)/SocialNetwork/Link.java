@@ -16,6 +16,7 @@ public class Link{
 	private boolean isValidLink;
 	private ArrayList<User> linkedUsers;
     private ArrayList<Date> dates;
+    private enum SocialNetworkStatus { SUCCESS, ALREADY_VALID, INVALID_USER, INVALID_DATE, ALREADY_ACTIVE, ALREADY_INACTIVE}
 
 	/**
 	* Creates and invalid link
@@ -32,8 +33,9 @@ public class Link{
      * @return True if they are linked, false if the link isn't valid or
      * one of the users is not valid.
      */
-	public boolean setUsers(ArrayList<User> users){
+	public boolean setUsers(ArrayList<User> users, SocialNetworkStatus status){
 		if(!isUserValid(users) || linkedUsers.size()!=0){
+            status = SocialNetworkStatus.ALREADY_VALID;
             return false;
 		}
         else{
