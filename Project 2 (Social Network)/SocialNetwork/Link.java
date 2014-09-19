@@ -1,8 +1,11 @@
 package SocialNetwork;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
 * A class that represents a link between two users
@@ -12,16 +15,16 @@ import java.util.Date;
 
 public class Link{
 	private boolean isValidLink;
-	private ArrayList<User> linkedUsers;
+	private Set<User> linkedUsers;
     private ArrayList<Date> dates;
-    private enum SocialNetworkStatus { SUCCESS, ALREADY_VALID, INVALID_USER, INVALID_DATE, ALREADY_ACTIVE, ALREADY_INACTIVE}
+    public enum SocialNetworkStatus { SUCCESS, ALREADY_VALID, INVALID_USER, INVALID_DATE, ALREADY_ACTIVE, ALREADY_INACTIVE}
 
 	/**
 	* Creates and invalid link
 	**/
 	public Link(){
 		isValidLink = false;
-		linkedUsers = new ArrayList<User>();
+		linkedUsers = new HashSet<User>();
         dates = new ArrayList<Date>();
 	}
 
@@ -31,7 +34,7 @@ public class Link{
      * @return True if they are linked, false if the link isn't valid or
      * one of the users is not valid.
      */
-	public void setUsers(ArrayList<User> users, SocialNetworkStatus status){
+	public void setUsers(HashSet<User> users, SocialNetworkStatus status){
 		if(!isUserValid(users)){
             status = SocialNetworkStatus.INVALID_USER;
         }
@@ -48,7 +51,7 @@ public class Link{
 	* Returns the set of users in this link
 	* Will throw an exception if the link is invalid
 	**/
-	public ArrayList<User> getUsers() throws  UninitializedObjectException{
+	public Set<User> getUsers() throws  UninitializedObjectException{
 		if(!this.isValidLink){
 			throw new UninitializedObjectException();
 		}
@@ -63,7 +66,8 @@ public class Link{
      * @param date The date being requested
      * @return True if successful, false otherwise.
      */
-	public void establish(Date date, SocialNetworkStatus status){
+	public void establish(Date date, SocialNetworkStatus status) throws Exception {
+        checkNotNull(date, status);
         if(isActive(date)){
             status = SocialNetworkStatus.ALREADY_ACTIVE;
         }
@@ -82,7 +86,8 @@ public class Link{
      * @param date The date being requested
      * @return True if the date has been added "torndown", false otherwise
      */
-	public void tearDown(Date date, SocialNetworkStatus status){
+	public void tearDown(Date date, SocialNetworkStatus status) throws Exception {
+        checkNotNull(date, status);
         if(isActive(date)){
             status = SocialNetworkStatus.ALREADY_ACTIVE;
         }
@@ -176,10 +181,10 @@ public class Link{
     }
 
 
-    private boolean isUserValid(ArrayList<User> users){
+    private boolean isUserValid(HashSet<User> users){
     	//Checks if the users are valid.
-        for (int i = 0; i < users.size() ; i++) {
-            if (users.get(i).getID() != null){
+        for (User user : users) {
+            if( user != null){
                 continue;
             }
             else
@@ -187,5 +192,13 @@ public class Link{
         }
         return true;
 
+    }
+
+    private void checkNotNull(Object... objectToCheck) throws Exception{
+        for (Object check : objectToCheck){
+            if(check.equals(null)){
+                throw new NullPointerException();
+            }
+        }
     }
 }

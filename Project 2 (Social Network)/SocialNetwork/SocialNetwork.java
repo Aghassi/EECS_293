@@ -1,8 +1,6 @@
 package SocialNetwork;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 /**
 * A class that represents a link between two users
@@ -66,35 +64,32 @@ public class SocialNetwork{
      * @param date The date being passed in
      * @return True if the link is established, false otherwise.
      */
-	public boolean establishLink(ArrayList<String> ids, Date date){
+	public void establishLink(ArrayList<String> ids, Date date, Link.SocialNetworkStatus status) throws Exception {
+       checkSizeOfUsers(ids);
        if(checkValidity(ids, date)){
            Link linkToAdd = new Link();
-           Object[] userIDs = ids.toArray();
-           ArrayList<User> usersToAdd = new ArrayList<User>();
-           for (int i = 0; i < ids.toArray().length; i++) {
-               usersToAdd.add(getUser(userIDs[i].toString()));
+           HashSet<User> usersToAdd = new HashSet<User>();
+           for (String id : ids) {
+               usersToAdd.add(getUser(id.toString()));
            }
-           linkToAdd.setUsers(usersToAdd);
-           linkToAdd.establish(date);
+           linkToAdd.setUsers(usersToAdd, status);
+           linkToAdd.establish(date, status);
            links.put(ids, linkToAdd);
-           return true;
        }
-       return false;
 	}
 
     /**
      * Tears down the link between two userss at the given date and returns true
      * Otherwise, returns false if users aren't valid, or if date is not recent
-     * @param id User pair being passed in
+     * @param ids User pair being passed in
      * @param date Date looking to tear down
      * @return True on success, false otherwise.
      */
-	public boolean tearDownLink(ArrayList<String> id, Date date){
-        if(checkValidity(id, date)){
-            links.get(id).tearDown(date);
-            return true;
+	public void tearDownLink(ArrayList<String> ids, Date date, Link.SocialNetworkStatus status) throws Exception {
+        checkSizeOfUsers(ids);
+        if(checkValidity(ids, date)){
+            links.get(ids).tearDown(date, status);
         }
-        return false;
 	}
 
     /**
@@ -107,18 +102,21 @@ public class SocialNetwork{
         boolean dateValid = false;
         boolean usersValid = false;
 
-        Object[] userIDs = ids.toArray();
-        for (int i = 0; i < userIDs.length; i++) {
-            usersValid = (userMap.containsKey(userIDs[i]) || !userIDs[i].equals(null));
+        for (String id : ids) {
+            return (userMap.containsKey(id) && !id.equals(null));
         }
 
         if(links.size() == 0) {
-            dateValid = true;
+           return true;
         }
         else{
-            dateValid = links.get(ids).isActive(date);
+            return links.get(ids).isActive(date);
         }
+    }
 
-        return (dateValid && usersValid);
+    private void checkSizeOfUsers(ArrayList<String> ids) throws Exception{
+        if (ids.size() > 2){
+            throw new UninitializedObjectException("Too many users!");
+        }
     }
 }
