@@ -2,10 +2,7 @@ package SocialNetwork;
 
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
 * A class that represents a link between two users
@@ -17,7 +14,6 @@ public class Link{
 	private boolean isValidLink;
 	private Set<User> linkedUsers;
     private ArrayList<Date> dates;
-    public enum SocialNetworkStatus { SUCCESS, ALREADY_VALID, INVALID_USER, INVALID_DATE, ALREADY_ACTIVE, ALREADY_INACTIVE}
 
 	/**
 	* Creates and invalid link
@@ -34,12 +30,12 @@ public class Link{
      * @return True if they are linked, false if the link isn't valid or
      * one of the users is not valid.
      */
-	public void setUsers(HashSet<User> users, SocialNetworkStatus status){
+	public void setUsers(HashSet<User> users, Statuses.SocialNetworkStatus status){
 		if(!isUserValid(users)){
-            status = SocialNetworkStatus.INVALID_USER;
+            status = Statuses.SocialNetworkStatus.INVALID_USER;
         }
         if(linkedUsers.size()!=0){
-            status = SocialNetworkStatus.ALREADY_ACTIVE;
+            status = Statuses.SocialNetworkStatus.ALREADY_ACTIVE;
 		}
         else{
             linkedUsers = users;
@@ -66,17 +62,17 @@ public class Link{
      * @param date The date being requested
      * @return True if successful, false otherwise.
      */
-	public void establish(Date date, SocialNetworkStatus status) throws Exception {
+	public void establish(Date date, Statuses.SocialNetworkStatus status) throws Exception {
         checkNotNull(date, status);
         if(isActive(date)){
-            status = SocialNetworkStatus.ALREADY_ACTIVE;
+            status = Statuses.SocialNetworkStatus.ALREADY_ACTIVE;
         }
         if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
-            status = SocialNetworkStatus.INVALID_DATE;
+            status = Statuses.SocialNetworkStatus.INVALID_DATE;
         }
         else {
             dates.add(date);
-            status = SocialNetworkStatus.SUCCESS;
+            status = Statuses.SocialNetworkStatus.SUCCESS;
         }
     }
 
@@ -86,7 +82,7 @@ public class Link{
      * @param date The date being requested
      * @return True if the date has been added "torndown", false otherwise
      */
-	public void tearDown(Date date, SocialNetworkStatus status) throws Exception {
+	public void tearDown(Date date, Statuses.SocialNetworkStatus status) throws Exception {
         establish(date, status);
     }
 
@@ -99,17 +95,26 @@ public class Link{
         if(isValidLink()){
             return false;
         }
-        //Will go through the list and check against each date
-        //Doesn't matter if the date exists or not, it could be between two other dates
-        int index = 0;
-        for(Date day: dates){
-            if(date.after(day)){
-                index++;
-            }
-            else{
-                return (index%2==0);
-            }
+
+        int dateIndex = Collections.binarySearch(dates, date);
+        if( dateIndex != -1){
+            return (dateIndex%2 ==0);
         }
+        else{
+            //Will go through the list and check against each date
+            //Doesn't matter if the date exists or not, it could be between two other dates
+            int index = 0;
+            for(Date day: dates){
+                if(date.after(day)){
+                    index++;
+                }
+                else{
+                    return (index%2==0);
+                }
+            }
+
+        }
+
 
         return false;
     }

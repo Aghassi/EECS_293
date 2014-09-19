@@ -2,6 +2,7 @@ package Testing;
 
 import SocialNetwork.SocialNetwork;
 import SocialNetwork.User;
+import SocialNetwork.Statuses;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -38,11 +39,14 @@ public class SocialNetworkUnitTest {
     }
 
     @Test
-    public void establishAndTeardownLink(){
+    public void establishAndTeardownLink() throws Exception {
         SocialNetwork testNetwork = new SocialNetwork();
         final User userOne = new User("David");
         final User userTwo = new User("Sarah");
         User userThree = new User("Jo");
+
+        userOne.setEmailAddress("dsa28@case.edu");
+        userOne.setPhoneNumber("1234567890");
 
         Date testDate = new Date();
         testDate.setMonth(5);
@@ -61,8 +65,8 @@ public class SocialNetworkUnitTest {
         testNetwork.addUser(userThree);
 
         //Test
-        Assert.assertTrue(testNetwork.establishLink(userIds, testDate));
-        Assert.assertTrue(testNetwork.tearDownLink(userIds, testDate));
+        testNetwork.establishLink(userIds, testDate, Statuses.SocialNetworkStatus.SUCCESS);
+        testNetwork.tearDownLink(userIds, testDate, Statuses.SocialNetworkStatus.SUCCESS);
     }
 
 }

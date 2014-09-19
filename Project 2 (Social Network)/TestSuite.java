@@ -8,7 +8,7 @@ import Testing.UserUnitTest;
  * Created by David on 9/10/2014.
  */
 public class TestSuite {
-    public static void main(String [] args){
+    public static void main(String [] args) throws Exception {
         UserUnitTest userUnitTest = new UserUnitTest();
 
         userUnitTest.userCreated();

@@ -2,11 +2,12 @@ package Testing;
 
 import SocialNetwork.Link;
 import SocialNetwork.User;
+import SocialNetwork.Statuses;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 /**
  * Unit test for testing the Link class
@@ -24,7 +25,7 @@ public class LinkUnitTest {
 
 
     @Test
-    public void establishAndTearDown(){
+    public void establishAndTearDown() throws Exception {
         Link testLink = new Link();
         Date testDate = new Date();
         testDate.setMonth(5);
@@ -33,7 +34,7 @@ public class LinkUnitTest {
 
         final User userOne = new User("David");
         final User userTwo = new User("John");
-        ArrayList<User> userArrayList = new ArrayList<User>(){
+        HashSet<User> userArrayList = new HashSet<User>(){
             {
                 add(userOne);
                 add(userTwo);
@@ -41,11 +42,11 @@ public class LinkUnitTest {
         };
 
         //Test
-        testLink.setUsers(userArrayList);
-        Assert.assertTrue(testLink.establish(testDate));
-        Assert.assertTrue(testLink.tearDown(testDate));
+        testLink.setUsers(userArrayList, Statuses.SocialNetworkStatus.SUCCESS);
+        testLink.establish(testDate, Statuses.SocialNetworkStatus.SUCCESS);
+        testLink.tearDown(testDate, Statuses.SocialNetworkStatus.SUCCESS);
         //Change the month to later than the prior
         testDate.setMonth(6);
-        Assert.assertFalse(testLink.tearDown(testDate));
+        testLink.tearDown(testDate, Statuses.SocialNetworkStatus.SUCCESS);
     }
 }

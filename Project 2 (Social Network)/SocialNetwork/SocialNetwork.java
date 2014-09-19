@@ -64,7 +64,7 @@ public class SocialNetwork{
      * @param date The date being passed in
      * @return True if the link is established, false otherwise.
      */
-	public void establishLink(ArrayList<String> ids, Date date, Link.SocialNetworkStatus status) throws Exception {
+	public void establishLink(ArrayList<String> ids, Date date, Statuses.SocialNetworkStatus status) throws Exception {
        checkSizeOfUsers(ids);
        if(checkValidity(ids, date)){
            Link linkToAdd = new Link();
@@ -85,7 +85,7 @@ public class SocialNetwork{
      * @param date Date looking to tear down
      * @return True on success, false otherwise.
      */
-	public void tearDownLink(ArrayList<String> ids, Date date, Link.SocialNetworkStatus status) throws Exception {
+	public void tearDownLink(ArrayList<String> ids, Date date, Statuses.SocialNetworkStatus status) throws Exception {
         checkSizeOfUsers(ids);
         if(checkValidity(ids, date)){
             links.get(ids).tearDown(date, status);
