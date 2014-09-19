@@ -99,9 +99,6 @@ public class SocialNetwork{
      * @return True if it is not less then, false otherwise.
      */
     public boolean checkValidity(ArrayList<String> ids, Date date){
-        boolean dateValid = false;
-        boolean usersValid = false;
-
         for (String id : ids) {
             return (userMap.containsKey(id) && !id.equals(null));
         }

@@ -87,17 +87,7 @@ public class Link{
      * @return True if the date has been added "torndown", false otherwise
      */
 	public void tearDown(Date date, SocialNetworkStatus status) throws Exception {
-        checkNotNull(date, status);
-        if(isActive(date)){
-            status = SocialNetworkStatus.ALREADY_ACTIVE;
-        }
-        if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
-            status = SocialNetworkStatus.INVALID_DATE;
-        }
-        else {
-            dates.add(date);
-            status = SocialNetworkStatus.SUCCESS;
-        }
+        establish(date, status);
     }
 
     /**
@@ -109,16 +99,18 @@ public class Link{
         if(isValidLink()){
             return false;
         }
-        if(dates.contains(date)){
-            if(dates.lastIndexOf(date)%2 == 0) {
-                //Even means it is active.
-                return true;
+        //Will go through the list and check against each date
+        //Doesn't matter if the date exists or not, it could be between two other dates
+        int index = 0;
+        for(Date day: dates){
+            if(date.after(day)){
+                index++;
             }
             else{
-                //Inactive
-                return false;
+                return (index%2==0);
             }
         }
+
         return false;
     }
 
@@ -201,4 +193,6 @@ public class Link{
             }
         }
     }
+
+
 }
