@@ -10,11 +10,11 @@ import java.util.*;
 
 public class SocialNetwork{
     private HashMap<String, User> userMap;
-    private HashMap<ArrayList<String>, Link> links;
+    private HashMap<HashSet<String>, Link> links;
 
 	public SocialNetwork(){
         userMap = new HashMap<String, User>();
-        links  = new HashMap<ArrayList<String>, Link>();
+        links  = new HashMap<HashSet<String>, Link>();
 	}
 
     /**
@@ -64,7 +64,7 @@ public class SocialNetwork{
      * @param date The date being passed in
      * @return True if the link is established, false otherwise.
      */
-	public void establishLink(ArrayList<String> ids, Date date, Statuses.SocialNetworkStatus status) throws Exception {
+	public void establishLink(HashSet<String> ids, Date date, Statuses.SocialNetworkStatus status) throws Exception {
        checkSizeOfUsers(ids);
        if(checkValidity(ids, date)){
            Link linkToAdd = new Link();
@@ -85,7 +85,7 @@ public class SocialNetwork{
      * @param date Date looking to tear down
      * @return True on success, false otherwise.
      */
-	public void tearDownLink(ArrayList<String> ids, Date date, Statuses.SocialNetworkStatus status) throws Exception {
+	public void tearDownLink(HashSet<String> ids, Date date, Statuses.SocialNetworkStatus status) throws Exception {
         checkSizeOfUsers(ids);
         if(checkValidity(ids, date)){
             links.get(ids).tearDown(date, status);
@@ -98,7 +98,7 @@ public class SocialNetwork{
      * @param date date being compared
      * @return True if it is not less then, false otherwise.
      */
-    public boolean checkValidity(ArrayList<String> ids, Date date){
+    public boolean checkValidity(HashSet<String> ids, Date date){
         for (String id : ids) {
             return (userMap.containsKey(id) && !id.equals(null));
         }
@@ -111,7 +111,7 @@ public class SocialNetwork{
         }
     }
 
-    private void checkSizeOfUsers(ArrayList<String> ids) throws Exception{
+    private void checkSizeOfUsers(HashSet<String> ids) throws Exception{
         if (ids.size() > 2){
             throw new UninitializedObjectException("Too many users!");
         }

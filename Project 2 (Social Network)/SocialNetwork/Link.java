@@ -63,7 +63,7 @@ public class Link{
      * @return True if successful, false otherwise.
      */
 	public void establish(Date date, Statuses.SocialNetworkStatus status) throws Exception {
-        checkNotNull(date, status);
+        ErrorChecker.checkNotNull(date, status);
         if(isActive(date)){
             status = Statuses.SocialNetworkStatus.ALREADY_ACTIVE;
         }
@@ -83,7 +83,18 @@ public class Link{
      * @return True if the date has been added "torndown", false otherwise
      */
 	public void tearDown(Date date, Statuses.SocialNetworkStatus status) throws Exception {
-        establish(date, status);
+        ErrorChecker.checkNotNull(date, status);
+        if(!isActive(date)){
+            status = Statuses.SocialNetworkStatus.ALREADY_INACTIVE;
+        }
+        if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
+            status = Statuses.SocialNetworkStatus.INVALID_DATE;
+        }
+        else {
+            dates.add(date);
+            status = Statuses.SocialNetworkStatus.SUCCESS;
+        }
+
     }
 
     /**
@@ -96,27 +107,8 @@ public class Link{
             return false;
         }
 
-        int dateIndex = Collections.binarySearch(dates, date);
-        if( dateIndex != -1){
-            return (dateIndex%2 ==0);
-        }
-        else{
-            //Will go through the list and check against each date
-            //Doesn't matter if the date exists or not, it could be between two other dates
-            int index = 0;
-            for(Date day: dates){
-                if(date.after(day)){
-                    index++;
-                }
-                else{
-                    return (index%2==0);
-                }
-            }
-
-        }
-
-
-        return false;
+        int index = binarySearchForDate(date, 0, dates.size());
+        return (index%2 == 0);
     }
 
     /**
@@ -191,11 +183,20 @@ public class Link{
 
     }
 
-    private void checkNotNull(Object... objectToCheck) throws Exception{
-        for (Object check : objectToCheck){
-            if(check.equals(null)){
-                throw new NullPointerException();
-            }
+    private int binarySearchForDate(Date date, int left, int right){
+        if(left>right){
+            return -1;
+        }
+        int middle = (left+right)/2;
+
+        if (dates.get(middle) == date || (dates.get(middle - 1).before(date) && dates.get(middle + 1).after(date))) {
+            return middle;
+        }
+        else if (dates.get(middle).after(date)) {
+            return binarySearchForDate(date, left, middle - 1);
+        }
+        else {
+            return binarySearchForDate(date, middle + 1, right);
         }
     }
 
