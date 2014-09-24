@@ -21,7 +21,7 @@ public class Friends {
      * @param distanceFromUser distance from current user
      * @return true if successful, false if otherwise
      */
-    public boolean set(User userToSet, int distanceFromUser){
+    public boolean set(User userToSet, int distanceFromUser) throws Exception {
         ErrorChecker.checkNotNull(userToSet, distanceFromUser);
         if(!valid()){
             user = userToSet;

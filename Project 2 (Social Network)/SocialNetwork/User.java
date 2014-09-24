@@ -1,6 +1,7 @@
 package SocialNetwork;
 
 import java.security.InvalidParameterException;
+import java.util.HashSet;
 
 /**
 * A class that represents a user object
@@ -8,11 +9,9 @@ import java.security.InvalidParameterException;
 **/
 
 public class User{
-	private String id;
-    private String firstName, lastName, middleName;
-    private String email;
-    private String phoneNumber;
+	private String id, firstName, lastName, middleName, email, phoneNumber;
 	private boolean isValidUser;
+    private HashSet<User> friends;
 
 	/**
 	* Creates a new user
@@ -30,6 +29,7 @@ public class User{
         middleName = null;
         email = null;
         phoneNumber = null;
+        friends = new HashSet<User>();
 	}
 
 
@@ -163,6 +163,20 @@ public class User{
 
         return this.id;
 	}
+
+    public void addFriend(User... user){
+        for (User users : user){
+            friends.add(users);
+        }
+    }
+
+    public void removeFriend(User user){
+        friends.remove(user);
+    }
+
+    public HashSet<User> getFriends(){
+        return friends;
+    }
 
 	/**
 	* @return If the user is valid or not

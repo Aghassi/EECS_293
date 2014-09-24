@@ -1,20 +1,21 @@
 package SocialNetwork;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
-* A class that represents a link between two users
+* A class that represents a social network
 * David Aghassi (dsa28@case.edu)
 * All methods throw a null point exception if any argument is null.
 **/
 
 public class SocialNetwork{
     private HashMap<String, User> userMap;
-    private HashMap<HashSet<String>, Link> links;
+    private HashMap<HashSet<User>, Link> links;
 
 	public SocialNetwork(){
         userMap = new HashMap<String, User>();
-        links  = new HashMap<HashSet<String>, Link>();
+        links  = new HashMap<HashSet<User>, Link>();
 	}
 
     /**
@@ -74,7 +75,13 @@ public class SocialNetwork{
            }
            linkToAdd.setUsers(usersToAdd, status);
            linkToAdd.establish(date, status);
-           links.put(ids, linkToAdd);
+           links.put(usersToAdd, linkToAdd);
+           for (User user: usersToAdd){
+               usersToAdd.remove(user);
+               user.addFriend((User[])usersToAdd.toArray());
+               usersToAdd.add(user);
+           }
+
        }
 	}
 
@@ -91,6 +98,32 @@ public class SocialNetwork{
             links.get(ids).tearDown(date, status);
         }
 	}
+
+    public HashSet<Friends> neighborhood(String id, Date date, Statuses.SocialNetworkStatus status) throws Exception {
+        if(id.equals(null) || !isMember(id)){
+            status = Statuses.SocialNetworkStatus.INVALID_USER;
+            ErrorChecker.checkNotNull(id);
+        }
+        ErrorChecker.checkNotNull(date, status);
+        User currentUser = getUser(id);
+        HashSet<Friends> friends = new HashSet<Friends>();
+        return findFriends(currentUser, 0, null, friends, status);
+    }
+
+    public HashSet<Friends> neighborhood(String id, Date date, int maxDistance, Statuses.SocialNetworkStatus status) throws Exception {
+        if(maxDistance > 0){
+            status = Statuses.SocialNetworkStatus.INVALID_DISTANCE;
+            return null;
+        }
+        if(id.equals(null) || !isMember(id)){
+            status = Statuses.SocialNetworkStatus.INVALID_USER;
+            ErrorChecker.checkNotNull(id);
+        }
+        ErrorChecker.checkNotNull(date, status);
+        User currentUser = getUser(id);
+        HashSet<Friends> friends = new HashSet<Friends>();
+        return findFriends(currentUser, 0, maxDistance, friends, status);
+    }
 
     /**
      * Checks to see if the date is less than the date in the link
@@ -116,4 +149,25 @@ public class SocialNetwork{
             throw new UninitializedObjectException("Too many users!");
         }
     }
+
+    private HashSet<Friends> findFriends(User user, int distance, Integer maxDistance, HashSet<Friends> friendsset, Statuses.SocialNetworkStatus status) throws Exception {
+        if(user.getFriends() == null){
+            return friendsset;
+        }
+        for (User friend: user.getFriends()){
+            Friends newFriend = new Friends();
+            newFriend.set(friend, distance);
+            friendsset.add(newFriend);
+            if(distance != maxDistance){
+                friendsset = findFriends(friend, distance++, maxDistance, friendsset, status);
+            }
+            else{
+                friendsset = findFriends(friend, distance++, null, friendsset, status);
+            }
+
+        }
+        status = Statuses.SocialNetworkStatus.SUCCESS;
+        return  friendsset;
+    }
+
 }
