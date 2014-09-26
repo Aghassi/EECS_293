@@ -106,8 +106,14 @@ public class Link{
             return false;
         }
 
-        int index = binarySearchForDate(date, 0, dates.size());
-        return (index%2 == 0);
+        if(dates.size() != 0) {
+            int index = binarySearchForDate(date, 0, dates.size());
+            return (index%2 == 0);
+        }
+        return false;
+
+
+
     }
 
     /**
@@ -182,6 +188,7 @@ public class Link{
 
     }
 
+    //Finds the date within a range of dates to see if the date is active
     private int binarySearchForDate(Date date, int left, int right){
         if(left>right){
             return -1;

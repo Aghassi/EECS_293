@@ -164,7 +164,7 @@ public class User{
         return this.id;
 	}
 
-    public void addFriend(User... user){
+    public void addFriend(User[] user){
         for (User users : user){
             friends.add(users);
         }

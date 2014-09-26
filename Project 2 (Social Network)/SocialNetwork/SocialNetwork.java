@@ -1,6 +1,6 @@
 package SocialNetwork;
 
-import java.lang.reflect.Array;
+
 import java.util.*;
 
 /**
@@ -76,9 +76,12 @@ public class SocialNetwork{
            linkToAdd.setUsers(usersToAdd, status);
            linkToAdd.establish(date, status);
            links.put(usersToAdd, linkToAdd);
-           for (User user: usersToAdd){
+
+           User[] arrayOfUsers = new User[usersToAdd.size()];
+           usersToAdd.toArray(arrayOfUsers);
+           for (User user: arrayOfUsers){
                usersToAdd.remove(user);
-               user.addFriend((User[])usersToAdd.toArray());
+               user.addFriend(arrayOfUsers);
                usersToAdd.add(user);
            }
 
@@ -99,6 +102,14 @@ public class SocialNetwork{
         }
 	}
 
+    /**
+     * Called to find all the users friends in the social network
+     * @param id The user being requested
+     * @param date The date being passed in
+     * @param status status to be set
+     * @return All the friends of the user
+     * @throws Exception
+     */
     public HashSet<Friends> neighborhood(String id, Date date, Statuses.SocialNetworkStatus status) throws Exception {
         if(id.equals(null) || !isMember(id)){
             status = Statuses.SocialNetworkStatus.INVALID_USER;
@@ -110,6 +121,15 @@ public class SocialNetwork{
         return findFriends(currentUser, 0, null, friends, status);
     }
 
+    /**
+     * Returns all the user's friends that are withing a certain distance of the user
+     * @param id The user being requested
+     * @param date The date being passed in
+     * @param maxDistance The max distance the friend can be from the user
+     * @param status the status to be set
+     * @return
+     * @throws Exception
+     */
     public HashSet<Friends> neighborhood(String id, Date date, int maxDistance, Statuses.SocialNetworkStatus status) throws Exception {
         if(maxDistance > 0){
             status = Statuses.SocialNetworkStatus.INVALID_DISTANCE;
@@ -150,6 +170,7 @@ public class SocialNetwork{
         }
     }
 
+    //Called recursively to find all the users in the social network
     private HashSet<Friends> findFriends(User user, int distance, Integer maxDistance, HashSet<Friends> friendsset, Statuses.SocialNetworkStatus status) throws Exception {
         if(user.getFriends() == null){
             return friendsset;
@@ -158,7 +179,7 @@ public class SocialNetwork{
             Friends newFriend = new Friends();
             newFriend.set(friend, distance);
             friendsset.add(newFriend);
-            if(distance != maxDistance){
+            if(distance != maxDistance && maxDistance != null){
                 friendsset = findFriends(friend, distance++, maxDistance, friendsset, status);
             }
             else{

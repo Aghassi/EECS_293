@@ -42,11 +42,14 @@ public class LinkUnitTest {
         };
 
         //Test
-        testLink.setUsers(userArrayList, Statuses.SocialNetworkStatus.SUCCESS);
-        testLink.establish(testDate, Statuses.SocialNetworkStatus.SUCCESS);
-        testLink.tearDown(testDate, Statuses.SocialNetworkStatus.SUCCESS);
-        //Change the month to later than the prior
-        testDate.setMonth(6);
-        testLink.tearDown(testDate, Statuses.SocialNetworkStatus.SUCCESS);
+        Statuses.SocialNetworkStatus status = Statuses.SocialNetworkStatus.SUCCESS;
+        testLink.setUsers(userArrayList, status);
+        Assert.assertEquals(0 , status.ordinal() );
+
+        testLink.establish(testDate, status);
+        Assert.assertEquals(0, status.ordinal());
+
+        testLink.tearDown(testDate, status);
+        Assert.assertEquals(0, status.ordinal());
     }
 }

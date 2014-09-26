@@ -2,13 +2,14 @@ package Testing;
 
 import SocialNetwork.SocialNetwork;
 import SocialNetwork.User;
+import SocialNetwork.Friends;
 import SocialNetwork.Statuses;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
+
 import java.util.Date;
-import java.util.Set;
+import java.util.HashSet;
 
 /**
  * A class to test the social network class
@@ -42,7 +43,7 @@ public class SocialNetworkUnitTest {
     public void establishAndTeardownLink() throws Exception {
         SocialNetwork testNetwork = new SocialNetwork();
         final User userOne = new User("David");
-        final User userTwo = new User("Sarah");
+        final User userTwo = new User("Alison");
         User userThree = new User("Jo");
 
         userOne.setEmailAddress("dsa28@case.edu");
@@ -53,7 +54,7 @@ public class SocialNetworkUnitTest {
         testDate.setDate(20);
 
 
-        ArrayList<String> userIds = new ArrayList<String>(){
+        HashSet<String> userIds = new HashSet<String>(){
             {
                 add(userOne.getID());
                 add(userTwo.getID());
@@ -65,8 +66,52 @@ public class SocialNetworkUnitTest {
         testNetwork.addUser(userThree);
 
         //Test
-        testNetwork.establishLink(userIds, testDate, Statuses.SocialNetworkStatus.SUCCESS);
-        testNetwork.tearDownLink(userIds, testDate, Statuses.SocialNetworkStatus.SUCCESS);
+        Statuses.SocialNetworkStatus status = Statuses.SocialNetworkStatus.SUCCESS;
+
+        testNetwork.establishLink(userIds, testDate, status);
+        Assert.assertEquals(0, status.ordinal());
+
+        testNetwork.tearDownLink(userIds, testDate, status);
+        Assert.assertEquals(0, status.ordinal());
     }
 
+    @Test
+    public void findUsers() throws Exception {
+        SocialNetwork testNetwork = new SocialNetwork();
+        final User userOne = new User("David");
+        final User userTwo = new User("Alison");
+        User userThree = new User("Jo");
+
+        userOne.setEmailAddress("dsa28@case.edu");
+        userOne.setPhoneNumber("1234567890");
+
+        Date testDate = new Date();
+        testDate.setMonth(5);
+        testDate.setDate(20);
+
+
+        HashSet<String> userIds = new HashSet<String>(){
+            {
+                add(userOne.getID());
+                add(userTwo.getID());
+            }
+        };
+
+        testNetwork.addUser(userOne);
+        testNetwork.addUser(userTwo);
+        testNetwork.addUser(userThree);
+
+        //Test
+        Statuses.SocialNetworkStatus status = Statuses.SocialNetworkStatus.SUCCESS;
+
+        testNetwork.establishLink(userIds, testDate, status);
+        Assert.assertEquals(0, status.ordinal());
+
+        HashSet<Friends> testFriends = testNetwork.neighborhood(userOne.getID(), testDate, status);
+        System.out.print(testFriends.toString());
+        Assert.assertEquals("Should be success", 0, status.ordinal());
+
+        testNetwork.tearDownLink(userIds, testDate, status);
+        Assert.assertEquals(0, status.ordinal());
+    }
 }
