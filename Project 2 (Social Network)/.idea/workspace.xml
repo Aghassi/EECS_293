@@ -23,17 +23,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SocialNetwork.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SocialNetwork.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SocialNetwork/SocialNetwork.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.73255813" vertical-offset="945" max-vertical-offset="2985">
-              <caret line="84" column="36" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1237" max-vertical-offset="3105">
+              <caret line="171" column="101" selection-start-line="171" selection-start-column="101" selection-end-line="171" selection-end-column="101" />
               <folding>
                 <element signature="e#1110#1111#0" expanded="true" />
                 <element signature="e#1153#1154#0" expanded="true" />
-                <element signature="e#2074#2080#0" expanded="true" />
-                <element signature="e#3882#3891#0" expanded="true" />
-                <element signature="e#4880#4889#0" expanded="true" />
+                <element signature="e#3917#3926#0" expanded="true" />
+                <element signature="e#4915#4924#0" expanded="true" />
+                <element signature="e#5952#5958#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -42,8 +42,8 @@
       <file leaf-file-name="Link.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SocialNetwork/Link.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="828" max-vertical-offset="3240">
-              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2523" max-vertical-offset="3255">
+              <caret line="180" column="34" selection-start-line="180" selection-start-column="34" selection-end-line="180" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -52,7 +52,7 @@
       <file leaf-file-name="User.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SocialNetwork/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2126" max-vertical-offset="3045">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2512" max-vertical-offset="3045">
               <caret line="166" column="30" selection-start-line="166" selection-start-column="26" selection-end-line="166" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -65,12 +65,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Statuses.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SocialNetwork/Statuses.java">
+      <file leaf-file-name="SocialNetworkUnitTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Testing/SocialNetworkUnitTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding />
+            <state vertical-scroll-proportion="2.5395033" vertical-offset="0" max-vertical-offset="1845">
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,20 +81,8 @@
         <entry file="file://$PROJECT_DIR$/TestSuite.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="82" max-vertical-offset="525">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SocialNetworkUnitTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Testing/SocialNetworkUnitTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1383" max-vertical-offset="1845">
-              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -121,9 +111,9 @@
         <option value="$PROJECT_DIR$/SocialNetwork/Statuses.java" />
         <option value="$PROJECT_DIR$/SocialNetwork/Friends.java" />
         <option value="$PROJECT_DIR$/Testing/SocialNetworkUnitTest.java" />
-        <option value="$PROJECT_DIR$/SocialNetwork/Link.java" />
-        <option value="$PROJECT_DIR$/Testing/LinkUnitTest.java" />
         <option value="$PROJECT_DIR$/SocialNetwork/User.java" />
+        <option value="$PROJECT_DIR$/Testing/LinkUnitTest.java" />
+        <option value="$PROJECT_DIR$/SocialNetwork/Link.java" />
         <option value="$PROJECT_DIR$/SocialNetwork/SocialNetwork.java" />
       </list>
     </option>
@@ -498,7 +488,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277849" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25751072" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39692703" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39692703" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39692703" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -535,15 +525,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/TestSuite.java</url>
-          <line>27</line>
-          <properties />
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="40" />
+      <option name="time" value="42" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -591,9 +573,9 @@
           <folding>
             <element signature="e#1110#1111#0" expanded="true" />
             <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#2074#2080#0" expanded="true" />
-            <element signature="e#3882#3891#0" expanded="true" />
-            <element signature="e#4880#4889#0" expanded="true" />
+            <element signature="e#3917#3926#0" expanded="true" />
+            <element signature="e#4915#4924#0" expanded="true" />
+            <element signature="e#5952#5958#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -637,9 +619,9 @@
           <folding>
             <element signature="e#1110#1111#0" expanded="true" />
             <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#2074#2080#0" expanded="true" />
-            <element signature="e#3882#3891#0" expanded="true" />
-            <element signature="e#4880#4889#0" expanded="true" />
+            <element signature="e#3917#3926#0" expanded="true" />
+            <element signature="e#4915#4924#0" expanded="true" />
+            <element signature="e#5952#5958#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -690,9 +672,9 @@
           <folding>
             <element signature="e#1110#1111#0" expanded="true" />
             <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#2074#2080#0" expanded="true" />
-            <element signature="e#3882#3891#0" expanded="true" />
-            <element signature="e#4880#4889#0" expanded="true" />
+            <element signature="e#3917#3926#0" expanded="true" />
+            <element signature="e#4915#4924#0" expanded="true" />
+            <element signature="e#5952#5958#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -727,9 +709,9 @@
           <folding>
             <element signature="e#1110#1111#0" expanded="true" />
             <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#2074#2080#0" expanded="true" />
-            <element signature="e#3882#3891#0" expanded="true" />
-            <element signature="e#4880#4889#0" expanded="true" />
+            <element signature="e#3917#3926#0" expanded="true" />
+            <element signature="e#4915#4924#0" expanded="true" />
+            <element signature="e#5952#5958#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -741,9 +723,9 @@
           <folding>
             <element signature="e#1110#1111#0" expanded="true" />
             <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#2074#2080#0" expanded="true" />
-            <element signature="e#3882#3891#0" expanded="true" />
-            <element signature="e#4880#4889#0" expanded="true" />
+            <element signature="e#3917#3926#0" expanded="true" />
+            <element signature="e#4915#4924#0" expanded="true" />
+            <element signature="e#5952#5958#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -785,9 +767,9 @@
           <folding>
             <element signature="e#1110#1111#0" expanded="true" />
             <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#2074#2080#0" expanded="true" />
-            <element signature="e#3882#3891#0" expanded="true" />
-            <element signature="e#4880#4889#0" expanded="true" />
+            <element signature="e#3917#3926#0" expanded="true" />
+            <element signature="e#4915#4924#0" expanded="true" />
+            <element signature="e#5952#5958#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -822,9 +804,9 @@
           <folding>
             <element signature="e#1110#1111#0" expanded="true" />
             <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#2074#2080#0" expanded="true" />
-            <element signature="e#3882#3891#0" expanded="true" />
-            <element signature="e#4880#4889#0" expanded="true" />
+            <element signature="e#3917#3926#0" expanded="true" />
+            <element signature="e#4915#4924#0" expanded="true" />
+            <element signature="e#5952#5958#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -851,9 +833,9 @@
           <folding>
             <element signature="e#1110#1111#0" expanded="true" />
             <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#2074#2080#0" expanded="true" />
-            <element signature="e#3882#3891#0" expanded="true" />
-            <element signature="e#4880#4889#0" expanded="true" />
+            <element signature="e#3917#3926#0" expanded="true" />
+            <element signature="e#4915#4924#0" expanded="true" />
+            <element signature="e#5952#5958#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -887,13 +869,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1411">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.11.jar!/org/junit/Assert.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.24" vertical-offset="1680" max-vertical-offset="2567">
-          <caret line="109" column="23" selection-start-line="109" selection-start-column="23" selection-end-line="109" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -951,6 +926,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.11.jar!/org/junit/Assert.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.72" vertical-offset="1087" max-vertical-offset="2265">
+          <caret line="83" column="23" selection-start-line="83" selection-start-column="23" selection-end-line="83" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SocialNetwork/Statuses.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
@@ -959,45 +942,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SocialNetwork/Link.java">
+    <entry file="file://$PROJECT_DIR$/Testing/LinkUnitTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="828" max-vertical-offset="3240">
-          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.35665914" vertical-offset="382" max-vertical-offset="915">
+          <caret line="36" column="33" selection-start-line="36" selection-start-column="33" selection-end-line="36" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TestSuite.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="82" max-vertical-offset="525">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Testing/LinkUnitTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.79909706" vertical-offset="426" max-vertical-offset="915">
-          <caret line="52" column="49" selection-start-line="52" selection-start-column="49" selection-end-line="52" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Testing/SocialNetworkUnitTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="903" max-vertical-offset="1845">
-          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SocialNetwork/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2126" max-vertical-offset="3045">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2512" max-vertical-offset="3045">
           <caret line="166" column="30" selection-start-line="166" selection-start-column="26" selection-end-line="166" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1009,16 +974,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SocialNetwork/Link.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2523" max-vertical-offset="3255">
+          <caret line="180" column="34" selection-start-line="180" selection-start-column="34" selection-end-line="180" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SocialNetwork/SocialNetwork.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73255813" vertical-offset="945" max-vertical-offset="2985">
-          <caret line="84" column="36" selection-start-line="84" selection-start-column="36" selection-end-line="84" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="1237" max-vertical-offset="3105">
+          <caret line="171" column="101" selection-start-line="171" selection-start-column="101" selection-end-line="171" selection-end-column="101" />
           <folding>
             <element signature="e#1110#1111#0" expanded="true" />
             <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#2074#2080#0" expanded="true" />
-            <element signature="e#3882#3891#0" expanded="true" />
-            <element signature="e#4880#4889#0" expanded="true" />
+            <element signature="e#3917#3926#0" expanded="true" />
+            <element signature="e#4915#4924#0" expanded="true" />
+            <element signature="e#5952#5958#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Testing/SocialNetworkUnitTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.5395033" vertical-offset="0" max-vertical-offset="1845">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

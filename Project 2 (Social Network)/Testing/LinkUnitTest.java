@@ -34,7 +34,7 @@ public class LinkUnitTest {
 
         final User userOne = new User("David");
         final User userTwo = new User("John");
-        HashSet<User> userArrayList = new HashSet<User>(){
+        HashSet<User> userHashSet = new HashSet<User>(){
             {
                 add(userOne);
                 add(userTwo);
@@ -43,7 +43,7 @@ public class LinkUnitTest {
 
         //Test
         Statuses.SocialNetworkStatus status = Statuses.SocialNetworkStatus.SUCCESS;
-        testLink.setUsers(userArrayList, status);
+        testLink.setUsers(userHashSet, status);
         Assert.assertEquals(0 , status.ordinal() );
 
         testLink.establish(testDate, status);

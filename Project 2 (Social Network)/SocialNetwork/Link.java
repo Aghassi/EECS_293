@@ -66,13 +66,8 @@ public class Link{
         if(isActive(date)){
             status = Statuses.SocialNetworkStatus.ALREADY_ACTIVE;
         }
-        if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
-            status = Statuses.SocialNetworkStatus.INVALID_DATE;
-        }
-        else {
-            dates.add(date);
-            status = Statuses.SocialNetworkStatus.SUCCESS;
-        }
+
+        addDateToLink(date, status);
     }
 
     /**
@@ -86,13 +81,8 @@ public class Link{
         if(!isActive(date)){
             status = Statuses.SocialNetworkStatus.ALREADY_INACTIVE;
         }
-        if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
-            status = Statuses.SocialNetworkStatus.INVALID_DATE;
-        }
-        else {
-            dates.add(date);
-            status = Statuses.SocialNetworkStatus.SUCCESS;
-        }
+
+        addDateToLink(date, status);
 
     }
 
@@ -186,6 +176,17 @@ public class Link{
         }
         return true;
 
+    }
+
+    //Adds the given date to links
+    private void addDateToLink(Date date, Statuses.SocialNetworkStatus status){
+        if (dates.size() > 0 && dates.get(dates.size()-1).after(date)) {
+            status = Statuses.SocialNetworkStatus.INVALID_DATE;
+        }
+        else {
+            dates.add(date);
+            status = Statuses.SocialNetworkStatus.SUCCESS;
+        }
     }
 
     //Finds the date within a range of dates to see if the date is active

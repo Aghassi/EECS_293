@@ -69,10 +69,7 @@ public class SocialNetwork{
        checkSizeOfUsers(ids);
        if(checkValidity(ids, date)){
            Link linkToAdd = new Link();
-           HashSet<User> usersToAdd = new HashSet<User>();
-           for (String id : ids) {
-               usersToAdd.add(getUser(id.toString()));
-           }
+           HashSet<User> usersToAdd = convertIDtoUser(ids);
            linkToAdd.setUsers(usersToAdd, status);
            linkToAdd.establish(date, status);
            links.put(usersToAdd, linkToAdd);
@@ -89,7 +86,7 @@ public class SocialNetwork{
 	}
 
     /**
-     * Tears down the link between two userss at the given date and returns true
+     * Tears down the link between two users at the given date and returns true
      * Otherwise, returns false if users aren't valid, or if date is not recent
      * @param ids User pair being passed in
      * @param date Date looking to tear down
@@ -98,7 +95,9 @@ public class SocialNetwork{
 	public void tearDownLink(HashSet<String> ids, Date date, Statuses.SocialNetworkStatus status) throws Exception {
         checkSizeOfUsers(ids);
         if(checkValidity(ids, date)){
-            links.get(ids).tearDown(date, status);
+            HashSet<User> usersToLookUp = convertIDtoUser(ids);
+            System.out.print(links.containsKey(usersToLookUp));
+            links.get(usersToLookUp).tearDown(date, status);
         }
 	}
 
@@ -168,6 +167,15 @@ public class SocialNetwork{
         if (ids.size() > 2){
             throw new UninitializedObjectException("Too many users!");
         }
+    }
+
+    //Takes hashset of id strings, finds the users, and returns a hashset of users from those strings
+    private HashSet<User> convertIDtoUser(HashSet<String> ids){
+        HashSet<User> usersToAdd = new HashSet<User>();
+        for (String id : ids) {
+            usersToAdd.add(getUser(id.toString()));
+        }
+        return usersToAdd;
     }
 
     //Called recursively to find all the users in the social network
