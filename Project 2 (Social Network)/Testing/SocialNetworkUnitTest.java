@@ -9,6 +9,7 @@ import org.junit.Test;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -80,7 +81,7 @@ public class SocialNetworkUnitTest {
         SocialNetwork testNetwork = new SocialNetwork();
         final User userOne = new User("David");
         final User userTwo = new User("Alison");
-        User userThree = new User("Jo");
+        final User userThree = new User("Jo");
 
         userOne.setEmailAddress("dsa28@case.edu");
         userOne.setPhoneNumber("1234567890");
@@ -97,6 +98,13 @@ public class SocialNetworkUnitTest {
             }
         };
 
+        HashSet<String> secondSetOfUserIds = new HashSet<String>(){
+            {
+                add(userTwo.getID());
+                add(userThree.getID());
+            }
+        };
+
         testNetwork.addUser(userOne);
         testNetwork.addUser(userTwo);
         testNetwork.addUser(userThree);
@@ -107,11 +115,12 @@ public class SocialNetworkUnitTest {
         testNetwork.establishLink(userIds, testDate, status);
         Assert.assertEquals(0, status.ordinal());
 
-        HashSet<Friends> testFriends = testNetwork.neighborhood(userOne.getID(), testDate, status);
+        testNetwork.establishLink(secondSetOfUserIds, testDate, status);
+        Assert.assertEquals(0, status.ordinal());
+
+        HashMap<String, Friends> testFriends = testNetwork.neighborhood(userOne.getID(), testDate, status);
         System.out.print(testFriends.toString());
         Assert.assertEquals("Should be success", 0, status.ordinal());
 
-        testNetwork.tearDownLink(userIds, testDate, status);
-        Assert.assertEquals(0, status.ordinal());
     }
 }

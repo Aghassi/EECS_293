@@ -26,6 +26,7 @@ public class TestSuite {
         socialNetworkUnitTest.createSocialNetwork();
         socialNetworkUnitTest.addUserTestAndIsMember();
         socialNetworkUnitTest.establishAndTeardownLink();
+        socialNetworkUnitTest.findUsers();
 
     }
 }

@@ -174,6 +174,10 @@ public class User{
         friends.remove(user);
     }
 
+    public int getFriendsSize(){
+        return friends.size();
+    }
+
     public HashSet<User> getFriends(){
         return friends;
     }

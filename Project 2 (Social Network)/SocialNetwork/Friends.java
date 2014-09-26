@@ -26,6 +26,7 @@ public class Friends {
         if(!valid()){
             user = userToSet;
             distance = distanceFromUser;
+            valid = true;
             return true;
         }
         return false;
