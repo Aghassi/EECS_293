@@ -1,6 +1,7 @@
 package SocialNetwork;
 
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -12,10 +13,12 @@ import java.util.*;
 public class SocialNetwork{
     private HashMap<String, User> userMap;
     private HashMap<HashSet<User>, Link> links;
+    private HashMap<User,  HashMap<String, Link>> usersToLinks;
 
 	public SocialNetwork(){
         userMap = new HashMap<String, User>();
         links  = new HashMap<HashSet<User>, Link>();
+        usersToLinks = new HashMap<User, HashMap<String, Link>>();
 	}
 
     /**
@@ -27,7 +30,8 @@ public class SocialNetwork{
         if(!user.isValid()){
             return false;
         }
-        if (!userMap.containsValue(user)){
+        if (!usersToLinks.containsValue(user)){
+            usersToLinks.put(user, new HashMap<String, Link>());
             userMap.put(user.getID(), user);
             return true;
         }
@@ -42,7 +46,7 @@ public class SocialNetwork{
      * @return True if the user is in the social network, false otherwise
      */
 	public 	boolean isMember(String id){
-        return userMap.containsKey(id);
+        return usersToLinks.containsKey(getUser(id));
 	}
 
     /**
@@ -72,17 +76,14 @@ public class SocialNetwork{
            HashSet<User> usersToAdd = convertIDtoUser(ids);
            linkToAdd.setUsers(usersToAdd, status);
            linkToAdd.establish(date, status);
-           links.put(usersToAdd, linkToAdd);
 
-           User[] arrayOfUsers = new User[usersToAdd.size()];
-           usersToAdd.toArray(arrayOfUsers);
-           for (User user: arrayOfUsers){
-               usersToAdd.remove(user);
-               arrayOfUsers = new User[usersToAdd.size()];
-               usersToAdd.toArray(arrayOfUsers);
-               user.addFriend(arrayOfUsers);
-               usersToAdd.add(user);
-               usersToAdd.toArray(arrayOfUsers);
+           //Adds the link to each user is social network
+           for(String id: ids){
+               HashMap map = usersToLinks.get(getUser(id));
+               if(!map.containsKey(ids)){
+                   map.put(ids, linkToAdd);
+               }
+               usersToLinks.put(getUser(id), map);
            }
 
        }
@@ -98,9 +99,18 @@ public class SocialNetwork{
 	public void tearDownLink(HashSet<String> ids, Date date, Statuses.SocialNetworkStatus status) throws Exception {
         checkSizeOfUsers(ids);
         if(checkValidity(ids, date)){
-            HashSet<User> usersToLookUp = convertIDtoUser(ids);
-            System.out.print(links.containsKey(usersToLookUp));
-            links.get(usersToLookUp).tearDown(date, status);
+            //Removes the link to each user is social network
+            for(String id: ids){
+                HashMap map = usersToLinks.get(getUser(id));
+                if(map.containsKey(ids)){
+                   Link linkToTeardown = (Link) map.get(ids);
+                   linkToTeardown.tearDown(date, status);
+                   map.remove(ids);
+                   map.put(ids, linkToTeardown);
+                }
+
+                usersToLinks.put(getUser(id), map);
+            }
         }
 	}
 
@@ -119,8 +129,7 @@ public class SocialNetwork{
         }
         ErrorChecker.checkNotNull(date, status);
         User currentUser = getUser(id);
-        HashMap<String, Friends> friends = new HashMap<String, Friends>();
-        return findFriends(currentUser, currentUser, 0, null, friends, status);
+        return findFriends(currentUser, Integer.MAX_VALUE, status);
     }
 
     /**
@@ -143,8 +152,7 @@ public class SocialNetwork{
         }
         ErrorChecker.checkNotNull(date, status);
         User currentUser = getUser(id);
-        HashMap<String, Friends> friends = new HashMap<String, Friends>();
-        return findFriends(currentUser, currentUser, 0, maxDistance, friends, status);
+        return findFriends(currentUser, maxDistance,  status);
     }
 
     /**
@@ -182,29 +190,49 @@ public class SocialNetwork{
     }
 
     //Called recursively to find all the users in the social network
-    private HashMap<String, Friends> findFriends(User user, User originalUser, int distance, Integer maxDistance, HashMap<String, Friends> friendsset, Statuses.SocialNetworkStatus status) throws Exception {
-        if(user.getFriendsSize() == 0){
-            return friendsset;
-        }
-        for (User friend: user.getFriends()){
-            Friends newFriend = new Friends();
-            newFriend.set(friend, distance);
-            if(friendsset.containsKey(friend.getID()) || friend.equals(originalUser) ){
+    private HashMap<String, Friends> findFriends(User user,  Integer maxDistance, Statuses.SocialNetworkStatus status) throws Exception {
+        //Breadth first traversal
+        Queue friendsToBeAdded = new LinkedList<Friends>();
+        HashMap<String, Friends> friendsToBeReturned = new HashMap<String, Friends>();
+        friendsToBeAdded.addAll(usersToLinks.get(user).values());
+        User lastUser = user;
+        int distance = 0;
+
+
+
+        while (!friendsToBeAdded.isEmpty()){
+            Link node = (Link) friendsToBeAdded.remove();
+            //Name of user
+            ArrayList<User> currentFriend = new ArrayList<User>();
+            currentFriend.addAll(node.getUsers());
+            //Remove the last user from the array
+            currentFriend.remove(lastUser);
+
+            if(friendsToBeReturned.containsKey(currentFriend.get(0).getID()) || currentFriend.contains(user)){
                 continue;
             }
-            else{
-                friendsset.put(friend.getID(), newFriend);
-            }
-            if(maxDistance == null){
-                friendsset = findFriends(friend, originalUser,  distance++, null, friendsset, status);
-            }
-            else if(maxDistance >= 0 && distance != maxDistance){
-                friendsset = findFriends(friend, originalUser, distance++, maxDistance, friendsset, status);
+            lastUser = currentFriend.get(0);
+
+
+            Friends friend = new Friends();
+            friend.set(currentFriend.get(0), distance);
+
+
+
+            //Put the name of the user with the friend
+            friendsToBeReturned.put(currentFriend.get(0).getID(), friend);
+            //Add the friend's friends
+            friendsToBeAdded.addAll(usersToLinks.get(currentFriend.get(0)).values());
+
+            distance++;
+            if(distance >= maxDistance){
+                break;
             }
 
         }
+
         status = Statuses.SocialNetworkStatus.SUCCESS;
-        return  friendsset;
+        return  friendsToBeReturned;
     }
 
 }

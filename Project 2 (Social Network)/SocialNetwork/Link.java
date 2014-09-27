@@ -196,14 +196,15 @@ public class Link{
         }
         int middle = (left+right)/2;
 
-        if (dates.get(middle) == date || (dates.get(middle - 1).before(date) && dates.get(middle + 1).after(date))) {
-            return middle;
-        }
-        else if (dates.get(middle).after(date)) {
+
+        if (dates.get(middle).after(date)) {
             return binarySearchForDate(date, left, middle - 1);
         }
-        else {
+        else if( dates.get(middle).before(date)){
             return binarySearchForDate(date, middle + 1, right);
+        }
+        else{
+            return  middle;
         }
     }
 
