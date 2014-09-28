@@ -14,11 +14,13 @@ public class SocialNetwork{
     private HashMap<String, User> userMap;
     private HashMap<HashSet<User>, Link> links;
     private HashMap<User,  HashMap<String, Link>> usersToLinks;
+    private HashMap<User, HashMap<Date, Integer>> trendMap;
 
 	public SocialNetwork(){
         userMap = new HashMap<String, User>();
         links  = new HashMap<HashSet<User>, Link>();
         usersToLinks = new HashMap<User, HashMap<String, Link>>();
+        trendMap = new HashMap<User, HashMap<Date, Integer>>();
 	}
 
     /**
@@ -123,13 +125,7 @@ public class SocialNetwork{
      * @throws Exception
      */
     public HashMap<String, Friends> neighborhood(String id, Date date, Statuses.SocialNetworkStatus status) throws Exception {
-        if(id.equals(null) || !isMember(id)){
-            status = Statuses.SocialNetworkStatus.INVALID_USER;
-            ErrorChecker.checkNotNull(id);
-        }
-        ErrorChecker.checkNotNull(date, status);
-        User currentUser = getUser(id);
-        return findFriends(currentUser, Integer.MAX_VALUE, status);
+        return neighborhood(id, date, Integer.MAX_VALUE, status);
     }
 
     /**
@@ -153,6 +149,17 @@ public class SocialNetwork{
         ErrorChecker.checkNotNull(date, status);
         User currentUser = getUser(id);
         return findFriends(currentUser, maxDistance,  status);
+    }
+
+    public Map<Date, Integer> neighborhoodTrend(String id, Statuses.SocialNetworkStatus status){
+        if(id.equals(null)){
+            status = Statuses.SocialNetworkStatus.INVALID_USER;
+            //Need to return or throw?
+        }
+        else{
+            return trendMap.get(getUser(id));
+        }
+
     }
 
     /**
@@ -213,11 +220,8 @@ public class SocialNetwork{
             }
             lastUser = currentFriend.get(0);
 
-
             Friends friend = new Friends();
             friend.set(currentFriend.get(0), distance);
-
-
 
             //Put the name of the user with the friend
             friendsToBeReturned.put(currentFriend.get(0).getID(), friend);
@@ -233,6 +237,10 @@ public class SocialNetwork{
 
         status = Statuses.SocialNetworkStatus.SUCCESS;
         return  friendsToBeReturned;
+    }
+
+    private void addDateAndSize(String id, Date date, int size){
+
     }
 
 }
