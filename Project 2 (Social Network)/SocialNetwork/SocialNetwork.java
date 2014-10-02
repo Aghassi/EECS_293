@@ -84,7 +84,9 @@ public class SocialNetwork{
                HashMap map = usersToLinks.get(getUser(id));
                if(!map.containsKey(ids)){
                    map.put(ids, linkToAdd);
+
                }
+               updateTrendMap(id, date);
                usersToLinks.put(getUser(id), map);
            }
 
@@ -110,7 +112,7 @@ public class SocialNetwork{
                    map.remove(ids);
                    map.put(ids, linkToTeardown);
                 }
-
+                updateTrendMap(id, date);
                 usersToLinks.put(getUser(id), map);
             }
         }
@@ -155,6 +157,7 @@ public class SocialNetwork{
         if(id.equals(null)){
             status = Statuses.SocialNetworkStatus.INVALID_USER;
             //Need to return or throw?
+            return null;
         }
         else{
             return trendMap.get(getUser(id));
@@ -239,8 +242,17 @@ public class SocialNetwork{
         return  friendsToBeReturned;
     }
 
-    private void addDateAndSize(String id, Date date, int size){
+    private void updateTrendMap (String id, Date date){
+        HashMap updatedTrendMap = trendMap.get((getUser(id)));
+        ArrayList trendsList = new ArrayList(updatedTrendMap.keySet());
 
+        Integer trendsCount = 1;
+        if (trendsList.size() > 0) {
+           trendsCount = (Integer) updatedTrendMap.get(trendsList.get(trendsList.size() - 1));
+        }
+
+        updatedTrendMap.put(date, trendsCount);
+        trendMap.put(getUser(id), updatedTrendMap);
     }
 
 }
