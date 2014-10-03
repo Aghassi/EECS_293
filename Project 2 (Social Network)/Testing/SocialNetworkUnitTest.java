@@ -119,8 +119,53 @@ public class SocialNetworkUnitTest {
         Assert.assertEquals(0, status.ordinal());
 
         HashMap<String, Friends> testFriends = testNetwork.neighborhood(userOne.getID(), testDate, status);
-        System.out.print(testFriends.toString());
         Assert.assertEquals("Should be success", 0, status.ordinal());
 
+    }
+
+    @Test
+    public void findTrends() throws Exception{
+        SocialNetwork testNetwork = new SocialNetwork();
+        final User userOne = new User("David");
+        final User userTwo = new User("Alison");
+        final User userThree = new User("Jo");
+
+        userOne.setEmailAddress("dsa28@case.edu");
+        userOne.setPhoneNumber("1234567890");
+
+        Date testDate = new Date();
+        testDate.setMonth(5);
+        testDate.setDate(20);
+
+
+        HashSet<String> userIds = new HashSet<String>(){
+            {
+                add(userOne.getID());
+                add(userTwo.getID());
+            }
+        };
+
+        HashSet<String> secondSetOfUserIds = new HashSet<String>(){
+            {
+                add(userTwo.getID());
+                add(userThree.getID());
+            }
+        };
+
+        testNetwork.addUser(userOne);
+        testNetwork.addUser(userTwo);
+        testNetwork.addUser(userThree);
+
+        //Test
+        Statuses.SocialNetworkStatus status = Statuses.SocialNetworkStatus.SUCCESS;
+
+        testNetwork.establishLink(userIds, testDate, status);
+        Assert.assertEquals(0, status.ordinal());
+
+        testNetwork.establishLink(secondSetOfUserIds, testDate, status);
+        Assert.assertEquals(0, status.ordinal());
+
+        HashMap testTrendMap = (HashMap) testNetwork.neighborhoodTrend(userOne.getID(), status);
+        System.out.print(testTrendMap.toString());
     }
 }

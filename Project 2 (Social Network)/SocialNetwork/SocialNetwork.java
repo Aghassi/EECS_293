@@ -244,15 +244,24 @@ public class SocialNetwork{
 
     private void updateTrendMap (String id, Date date){
         HashMap updatedTrendMap = trendMap.get((getUser(id)));
-        ArrayList trendsList = new ArrayList(updatedTrendMap.keySet());
 
-        Integer trendsCount = 1;
-        if (trendsList.size() > 0) {
-           trendsCount = (Integer) updatedTrendMap.get(trendsList.get(trendsList.size() - 1));
+        if(updatedTrendMap != null){
+            ArrayList trendsList = new ArrayList(updatedTrendMap.keySet());
+            Integer trendsCount = 1;
+
+
+            trendsCount = (Integer) updatedTrendMap.get(trendsList.get(trendsList.size() - 1));
+            updatedTrendMap.put(date, ++trendsCount);
+            trendMap.put(getUser(id), updatedTrendMap);
+        }
+        else{
+            HashMap trendStart =  new HashMap();
+            trendStart.put(date, 1);
+            trendMap.put(getUser(id), trendStart);
+            return;
         }
 
-        updatedTrendMap.put(date, trendsCount);
-        trendMap.put(getUser(id), updatedTrendMap);
+
     }
 
 }
